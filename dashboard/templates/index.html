@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GhoSty OwO Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=1.1">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @media (max-width: 992px) {
+
+            .hide-mobile,
+            .hide-mobile-title {
+                display: none !important;
+            }
+
+            .header-actions {
+                gap: 6px !important;
+            }
+
+            .icon-only-mobile {
+                padding: 6px 8px !important;
+                gap: 0 !important;
+            }
+
+            .donate-btn-mobile {
+                padding: 6px 10px !important;
+                gap: 4px !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark-mode">
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="brand">
+                <img src="/assets/ghosty%20owo%20logo.jpeg" alt="GhoSty Logo"
+                    style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                <div class="brand-text">
+                    <h2>GhoSty OwO</h2>
+                    <span>Async Development</span>
+                </div>
+            </div>
+            <button class="mobile-close" id="mobile-close"><i class="fa-solid fa-times"></i></button>
+        </div>
+
+        <nav class="nav-menu">
+            <button class="nav-item active" data-target="tab-home">
+                <i class="fa-solid fa-home"></i> Home
+            </button>
+            <button class="nav-item" data-target="tab-status">
+                <i class="fa-solid fa-chart-pie"></i> Status
+            </button>
+            <button class="nav-item" data-target="tab-control">
+                <i class="fa-solid fa-gamepad"></i> Control Panel
+            </button>
+            <button class="nav-item" data-target="tab-console">
+                <i class="fa-solid fa-terminal"></i> Console
+            </button>
+            <button class="nav-item" data-target="tab-profit">
+                <i class="fa-solid fa-coins"></i> Profit
+            </button>
+            <button class="nav-item" data-target="tab-settings">
+                <i class="fa-solid fa-cog"></i> Settings
+            </button>
+            <button class="nav-item" data-target="tab-info">
+                <i class="fa-solid fa-circle-info"></i> Info
+            </button>
+        </nav>
+    </div>
+
+    <div class="main-content">
+        <header class="top-header">
+            <button class="mobile-toggle" id="mobile-toggle"><i class="fa-solid fa-bars"></i></button>
+            <div class="header-title hide-mobile-title">Dashboard Overview</div>
+            <div class="header-actions" style="display: flex; gap: 10px;">
+                <a href="https://github.com/WannaBeGhoSt" target="_blank" class="btn btn-sm icon-only-mobile"
+                    style="background-color: var(--card-bg); border: 1px solid var(--border); color: var(--text); display: flex; align-items: center; gap: 6px; text-decoration: none; padding: 6px 12px; font-size: 13px; font-weight: 500;">
+                    <i class="fa-brands fa-github" style="font-size: 15px;"></i> <span class="hide-mobile">GitHub</span>
+                </a>
+                <a href="https://discord.gg/asMJGgDA7u" target="_blank" class="btn btn-sm icon-only-mobile"
+                    style="background-color: #5865F2; border: 1px solid #5865F2; color: white; display: flex; align-items: center; gap: 6px; text-decoration: none; padding: 6px 12px; font-size: 13px; font-weight: 500; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                    <i class="fa-brands fa-discord" style="font-size: 15px;"></i> <span
+                        class="hide-mobile">Discord</span>
+                </a>
+                <a href="https://donatr.ee/brutality/" target="_blank" class="btn btn-sm donate-btn-mobile"
+                    style="background-color: #22c77e; border: 1px solid #22c77e; color: white; display: flex; align-items: center; gap: 6px; text-decoration: none; padding: 6px 12px; font-size: 13px; font-weight: 500; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                    <i class="fa-solid fa-heart" style="font-size: 15px;"></i> Donate
+                </a>
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            <!-- HOME TAB -->
+            <div id="tab-home" class="tab-pane active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon purple"><i class="fa-solid fa-users"></i></div>
+                        <div class="stat-details">
+                            <h3>Total Workers</h3>
+                            <h2 id="home-total-workers">-</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fa-solid fa-play"></i></div>
+                        <div class="stat-details">
+                            <h3>Active Workers</h3>
+                            <h2 id="home-active-workers">-</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon yellow"><i class="fa-solid fa-coins"></i></div>
+                        <div class="stat-details">
+                            <h3>Total Cowoncy</h3>
+                            <h2 id="home-total-cowoncy">-</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon cyan"><i class="fa-solid fa-flask"></i></div>
+                        <div class="stat-details">
+                            <h3>Total Essence</h3>
+                            <h2 id="home-total-essence">-</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4">
+                    <div class="card-header">
+                        <h3>Quick Actions</h3>
+                    </div>
+                    <div class="card-body action-buttons">
+                        <button class="btn btn-primary" onclick="controlAll('start')"><i class="fa-solid fa-play"></i>
+                            Start All Workers</button>
+                        <button class="btn btn-success" onclick="controlAll('resume')"><i class="fa-solid fa-play"></i>
+                            Resume All</button>
+                        <button class="btn btn-warning" onclick="controlAll('pause')"><i class="fa-solid fa-pause"></i>
+                            Pause All</button>
+                        <button class="btn btn-danger" onclick="controlAll('stop')"><i class="fa-solid fa-stop"></i>
+                            Stop All</button>
+                        <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                            <input type="text" id="say-input" placeholder="Enter text to say..."
+                                style="flex: 1; min-width: 200px; padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text);">
+                            <button class="btn btn-primary" onclick="window.sayCommand()"><i
+                                    class="fa-solid fa-comment"></i> Say All</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="toast-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;"></div>
+
+            <!-- STATUS TAB -->
+            <div id="tab-status" class="tab-pane">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Worker Detailed Status</h3>
+                        <button class="btn btn-sm btn-outline" onclick="window.fetchStatus()"><i
+                                class="fa-solid fa-sync"></i> Refresh</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="status-grid" id="status-grid"
+                            style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 15px;">
+                            <!-- Rendered dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTROL PANEL TAB -->
+            <div id="tab-control" class="tab-pane">
+                <div class="card" style="margin-bottom: 20px;">
+                    <div class="card-header">
+                        <h3>🎮 GhoSty OwO Main Controller Settings</h3>
+                    </div>
+                    <div class="card-body" style="display: flex; flex-direction: column; gap: 15px;">
+                        <p class="text-muted" style="margin-bottom: 0;">Apply settings to all workers or specific
+                            workers instantly.</p>
+
+                        <div
+                            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                            <div
+                                style="background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                                <h4 style="margin-bottom: 10px;"><i class="fa-solid fa-bolt"
+                                        style="color: #fbbf24;"></i> Change Speed Mode</h4>
+                                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                                    <select id="ctrl-speed-worker" class="form-select" style="flex: 1;">
+                                        <option value="all">All Workers</option>
+                                    </select>
+                                    <select id="ctrl-speed-mode" class="form-select" style="flex: 1;">
+                                        <option value="lifetime">Lifetime</option>
+                                        <option value="humanoid">Humanoid</option>
+                                        <option value="durable">Durable</option>
+                                        <option value="fast">Fast</option>
+                                        <option value="efficient">Efficient</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" onclick="window.applyControllerSettings('speed')"
+                                    style="width: 100%;">Apply Speed</button>
+                            </div>
+
+                            <div
+                                style="background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                                <h4 style="margin-bottom: 10px;"><i class="fa-solid fa-crosshairs"
+                                        style="color: #ef4444;"></i> Toggle HuntBot</h4>
+                                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                                    <select id="ctrl-hb-worker" class="form-select" style="flex: 1;">
+                                        <option value="all">All Workers</option>
+                                    </select>
+                                    <select id="ctrl-hb-toggle" class="form-select" style="flex: 1;">
+                                        <option value="on">On</option>
+                                        <option value="off">Off</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" onclick="window.applyControllerSettings('huntbot')"
+                                    style="width: 100%;">Apply HuntBot</button>
+                            </div>
+
+                            <div
+                                style="background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                                <h4 style="margin-bottom: 10px;"><i class="fa-solid fa-pause"
+                                        style="color: #f59e0b;"></i> Timed Pause</h4>
+                                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                                    <select id="ctrl-pause-worker" class="form-select" style="flex: 1;">
+                                        <option value="all">All Workers</option>
+                                    </select>
+                                    <input type="text" id="ctrl-pause-time" placeholder="e.g. 30m, 1h30m"
+                                        class="form-select" style="flex: 1; padding: 8px;">
+                                </div>
+                                <button class="btn btn-warning" onclick="window.applyControllerSettings('pause_time')"
+                                    style="width: 100%;">Apply Timed Pause</button>
+                            </div>
+
+                            <div
+                                style="background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                                <h4 style="margin-bottom: 10px;"><i class="fa-solid fa-envelope"
+                                        style="color: #6366f1;"></i> Check Mail</h4>
+                                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                                    <select id="ctrl-mail-worker" class="form-select" style="flex: 1;">
+                                        <option value="all">All Workers</option>
+                                    </select>
+                                </div>
+                                <button class="btn btn-primary" onclick="window.applyControllerSettings('mail')"
+                                    style="width: 100%;">Check Mail</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Individual Worker Controls</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="control-grid" id="control-grid">
+                            <!-- Rendered dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONSOLE TAB -->
+            <div id="tab-console" class="tab-pane">
+                <div class="card console-card">
+                    <div class="card-header console-header">
+                        <h3>Live Console</h3>
+                        <div class="console-controls">
+                            <select id="console-filter" class="form-select">
+                                <option value="all">All Workers</option>
+                            </select>
+                            <button class="btn btn-sm btn-outline" id="console-clear"><i class="fa-solid fa-eraser"></i>
+                                Clear</button>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="console-autoscroll" checked>
+                                <span class="slider"></span>
+                                <span class="toggle-label">Auto-scroll</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="card-body console-body" id="console-output">
+                        <!-- Rendered dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROFIT TAB -->
+            <div id="tab-profit" class="tab-pane">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Live Profit Calculator</h3>
+                        <button class="btn btn-primary" onclick="fetchProfit()"><i class="fa-solid fa-calculator"></i>
+                            Fetch Live Profit</button>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted mb-4">Clicking the button above will trigger the Zoo Profit calculator
+                            logic internally to update current holdings for each worker. (Note: May trigger discord API
+                            calls).</p>
+
+                        <div class="profit-grid" id="profit-grid">
+                            <!-- Rendered dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SETTINGS TAB -->
+            <div id="tab-settings" class="tab-pane">
+                <div class="card" style="margin-bottom: 20px;">
+                    <div class="card-header">
+                        <h3>Dashboard Display Settings</h3>
+                    </div>
+                    <div class="card-body">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-color); padding: 15px; border-radius: 8px; border: 1px solid var(--border);">
+                            <div>
+                                <h4 style="margin: 0; margin-bottom: 5px;"><i class="fa-solid fa-video"
+                                        style="color: #a855f7;"></i> Streamer Mode</h4>
+                                <div style="font-size: 13px; color: var(--text-muted);">Completely hide worker usernames
+                                    and sensitive information across the dashboard.</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="settings-streamer-mode">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>tokens.txt</h3>
+                        </div>
+                        <div class="card-body">
+                            <textarea id="settings-tokens" class="form-textarea" rows="10"
+                                placeholder="Enter tokens here..."></textarea>
+                            <button class="btn btn-primary mt-3" onclick="saveConfig('tokens')"><i
+                                    class="fa-solid fa-save"></i> Save Tokens</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>channels.txt</h3>
+                        </div>
+                        <div class="card-body">
+                            <textarea id="settings-channels" class="form-textarea" rows="10"
+                                placeholder="Enter channel IDs here..."></textarea>
+                            <button class="btn btn-primary mt-3" onclick="saveConfig('channels')"><i
+                                    class="fa-solid fa-save"></i> Save Channels</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-4 danger-zone">
+                    <div class="card-header">
+                        <h3 class="text-danger"><i class="fa-solid fa-triangle-exclamation"></i> Danger Zone</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Restarting the script will temporarily disconnect all workers and reboot the entire Python
+                            process.</p>
+                        <button class="btn btn-danger mt-2" onclick="restartScript()"><i
+                                class="fa-solid fa-power-off"></i> Restart Script</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- INFO TAB -->
+            <div id="tab-info" class="tab-pane">
+                <div class="card" style="margin-bottom: 20px;">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-code-branch"></i> Version Info</h3>
+                    </div>
+                    <div class="card-body">
+                        <h4 style="color: #a855f7; margin-bottom: 5px;">GhoSty OwO V4 Alpha Build</h4>
+                        <strong>Stable Alpha Build Version: 280826.4.1.0</strong>
+                        <p style="color: var(--text-muted); font-size: 14px; margin-top: 15px;">
+                            <strong>What's New:</strong>
+                            <ul style="color: var(--text-muted); font-size: 14px; margin-top: 10px; line-height: 1.6;">
+                                <li><strong>Built-in Web Dashboard:</strong> Real-time monitoring, live stats, and remote control of all workers natively integrated.</li>
+                                <li><strong>Boss Module:</strong> Automated and intelligent boss fighting support.</li>
+                                <li><strong>Quests Module:</strong> Fully automated quest tracking, updating, and claiming.</li>
+                                <li><strong>Mail Module:</strong> Automatically fetches and claims mails.</li>
+                                <li><strong>Humanoid Speed Mode:</strong> Advanced dynamic fatigue algorithm using a bezier curve-shaped gaussian distribution combined with random server lurking to seamlessly evade detection.</li>
+                                <li><strong>Revamped UI Engine:</strong> A completely redesigned CLI backend interface structure for optimal display.</li>
+                                <li><strong>Codebase Rewrite:</strong> Codebase rewrite from discord.py to discord.py-self.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3><i class="fa-solid fa-laptop-code"></i> About Developer</h3>
+                    </div>
+                    <div class="card-body" style="display: flex; align-items: center; gap: 20px;">
+                        <img src="/assets/brutality.jpg" alt="Brutality Logo" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+                        <div>
+                            <p style="color: var(--text-muted); font-size: 15px; line-height: 1.6; margin: 0;">
+                                <strong>Made With ♥ By @WannaBeGhoSt (GitHub)</strong><br>
+                                This script is continuously developed and maintained by <strong>GhoSty | Brutality (🇮🇳 Async Development)</strong>. We focus on building advanced, highly optimized, and robust automation tools for the community.
+                            </p>
+                            <div style="margin-top: 15px; display: flex; gap: 10px;">
+                                <a href="https://discord.gg/asMJGgDA7u" target="_blank" class="btn btn-primary" style="background-color: #5865F2; border: none;"><i class="fa-brands fa-discord"></i> Join Discord</a>
+                                <a href="https://github.com/WannaBeGhoSt" target="_blank" class="btn btn-primary" style="background-color: #24292e; border: none;"><i class="fa-brands fa-github"></i> GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>
