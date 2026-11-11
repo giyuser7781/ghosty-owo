@@ -348,9 +348,9 @@ def start_server():
         
     try:
         from waitress import serve
-        serve(app, host='0.0.0.0', port=8765)
+        serve(app, host='0.0.0.0', port=25302)
     except ImportError:
-        app.run(host="0.0.0.0", port=8765, debug=False, use_reloader=False)
+        app.run(host="0.0.0.0", port=25302, debug=False, use_reloader=False)
 
 if __name__ == "__main__":
     start_server()
